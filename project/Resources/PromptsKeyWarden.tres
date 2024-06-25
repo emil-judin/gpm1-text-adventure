@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="AttackPrompt" load_steps=2 format=3 uid="uid://hw3aeaws2kty"]
+
+[ext_resource type="Script" path="res://Scripts/AttackPrompt.gd" id="1_7y2i0"]
+
+[resource]
+script = ExtResource("1_7y2i0")
+attackPrompts = Array[String](["fifteen men on a dead man's chest yo ho ho and a bottle of rum", "what shall we do with a drunken sailor early in the morning", "roll the old chariot along and we'll all hang on behind", "farewell and adieu to you spanish ladies", "blow ye winds in the morning blow ye winds hi ho", "eave her johnny leave her oh leave her johnny leave her", "well go no more a roving so late into the night", "or well rant and well roar like true british sailors", "oh you new york girls cant you dance the polka", "heres a health to the company and one to my lass"])

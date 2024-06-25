@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://dh2v81jl0wobf"]
+
+[ext_resource type="Script" path="res://Scripts/AttackTyper.gd" id="1_pdi7x"]
+[ext_resource type="FontFile" uid="uid://duykiugmun2e4" path="res://Resources/small_pixel.ttf" id="2_tfjnv"]
+[ext_resource type="Texture2D" uid="uid://div8p3qvmxnbp" path="res://Sprites/pixel.png" id="3_axdq1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m08ct"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 0.572549)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a0kwq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8j4dq"]
+texture = ExtResource("3_axdq1")
+
+[node name="AttackTyper" type="Control" node_paths=PackedStringArray("attackPromptLabel", "timerProgressBar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_pdi7x")
+attackPromptLabel = NodePath("Panel/AttackPromptLabel")
+timerProgressBar = NodePath("Panel/AttackPromptLabel/TimerProgressBar")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m08ct")
+
+[node name="AttackPromptLabel" type="RichTextLabel" parent="Panel"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_tfjnv")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TimerProgressBar" type="ProgressBar" parent="Panel/AttackPromptLabel"]
+modulate = Color(0.870588, 0, 0, 1)
+z_index = -1
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxEmpty_a0kwq")
+theme_override_styles/fill = SubResource("StyleBoxTexture_8j4dq")
+step = 0.001
+value = 20.0
+show_percentage = false

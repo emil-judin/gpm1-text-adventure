@@ -1,0 +1,86 @@
+[gd_scene load_steps=15 format=3 uid="uid://36p0nydch8gn"]
+
+[ext_resource type="Script" path="res://Scripts/RoomManager.gd" id="1_g81wl"]
+[ext_resource type="PackedScene" uid="uid://dbqkkuvhgfcrt" path="res://Prefabs/MapRoom.tscn" id="2_5qo34"]
+[ext_resource type="PackedScene" uid="uid://blgch03l726w" path="res://Prefabs/DungeonRoom.tscn" id="3_rrpid"]
+[ext_resource type="Script" path="res://Scripts/CameraZoom.gd" id="4_055gu"]
+[ext_resource type="PackedScene" uid="uid://lhicx8xrcg3g" path="res://Prefabs/GameManager.tscn" id="5_btob4"]
+[ext_resource type="PackedScene" uid="uid://du6r3bsahws6a" path="res://Prefabs/Pin.tscn" id="5_vvbaa"]
+[ext_resource type="Texture2D" uid="uid://b5asj5tofrs22" path="res://Sprites/player.png" id="6_nah7m"]
+[ext_resource type="PackedScene" uid="uid://clj2gff787a68" path="res://Prefabs/TextParser.tscn" id="7_8021l"]
+[ext_resource type="PackedScene" uid="uid://mjsl6ebq2slh" path="res://Prefabs/StatsManager.tscn" id="7_wprdo"]
+[ext_resource type="PackedScene" uid="uid://dh2v81jl0wobf" path="res://Prefabs/AttackTyper.tscn" id="8_d6x4h"]
+[ext_resource type="PackedScene" uid="uid://dpsl4ksift3r" path="res://Prefabs/Sceletons.tscn" id="9_41yjw"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="9_bvehr"]
+[ext_resource type="Script" path="res://Scripts/old_HealthManager.gd" id="11_0wulh"]
+[ext_resource type="PackedScene" uid="uid://uyrw5ecau5oq" path="res://Prefabs/SceletonBoss.tscn" id="14_kfh34"]
+
+[node name="RoomManager" type="Node2D" node_paths=PackedStringArray("mapParentNode", "dungeonParentNode", "enemyParentNode")]
+script = ExtResource("1_g81wl")
+mapRoomScene = ExtResource("2_5qo34")
+dungeonRoomScene = ExtResource("3_rrpid")
+mapParentNode = NodePath("CanvasLayer/Panel/Map")
+dungeonParentNode = NodePath("Dungeon")
+enemyParentNode = NodePath("Enemy")
+bombSpawnProbability = 0.1
+healSpawnProbability = 0.1
+metadata/_edit_group_ = true
+
+[node name="Enemy" type="Node2D" parent="."]
+
+[node name="Dungeon" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("4_055gu")
+player = NodePath("../Player")
+zoomSpeed = 0.005
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AttackTyper" parent="CanvasLayer" instance=ExtResource("8_d6x4h")]
+visible = false
+
+[node name="TextParser" parent="CanvasLayer" node_paths=PackedStringArray("gameManager") instance=ExtResource("7_8021l")]
+gameManager = NodePath("../../GameManager")
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_right = 60.0
+offset_bottom = 60.0
+
+[node name="Map" type="Node2D" parent="CanvasLayer/Panel"]
+position = Vector2(30, 30)
+scale = Vector2(0.5, 0.5)
+
+[node name="Pin" parent="CanvasLayer/Panel" instance=ExtResource("5_vvbaa")]
+
+[node name="StatsManager" parent="CanvasLayer" instance=ExtResource("7_wprdo")]
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("statsManager", "healthManager")]
+script = ExtResource("9_bvehr")
+statsManager = NodePath("../CanvasLayer/StatsManager")
+baseDamage = 2.0
+healthManager = NodePath("HealthManager")
+metadata/_edit_group_ = true
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+texture = ExtResource("6_nah7m")
+
+[node name="HealthManager" type="Node2D" parent="Player"]
+script = ExtResource("11_0wulh")
+maxHealth = 3
+
+[node name="GameManager" parent="." node_paths=PackedStringArray("player", "pin", "textParser", "roomManager", "attackTyper", "camera") instance=ExtResource("5_btob4")]
+winScreenScene = "res://Scenes/WinScreen.tscn"
+player = NodePath("../Player")
+pin = NodePath("../CanvasLayer/Panel/Pin")
+textParser = NodePath("../CanvasLayer/TextParser")
+roomManager = NodePath("..")
+attackTyper = NodePath("../CanvasLayer/AttackTyper")
+camera = NodePath("../Camera2D")
+sceletonsScene = ExtResource("9_41yjw")
+sceletonBossScene = ExtResource("14_kfh34")
+sceletonsSpawnProbabiblity = 0.25
+enemyDropHealProbability = 0.5
+enemyDropBombProbability = 0.5
+
+[connection signal="attack_typer_finished" from="CanvasLayer/AttackTyper" to="GameManager" method="handleAttackTyperFeedback"]

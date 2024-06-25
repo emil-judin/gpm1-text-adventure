@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://clj2gff787a68"]
+
+[ext_resource type="Script" path="res://Scripts/TextParser.gd" id="1_ctuy6"]
+[ext_resource type="PackedScene" uid="uid://byhvqu4auct5r" path="res://Prefabs/LabelPreset.tscn" id="2_6twvb"]
+[ext_resource type="Script" path="res://Scripts/AutoScroll.gd" id="2_p2apu"]
+[ext_resource type="FontFile" uid="uid://duykiugmun2e4" path="res://Resources/small_pixel.ttf" id="3_hoccc"]
+
+[node name="TextParser" type="Control" node_paths=PackedStringArray("inputLineEdit", "outputContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ctuy6")
+inputLineEdit = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/LineEdit")
+outputContainer = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer")
+labelPreset = ExtResource("2_6twvb")
+focusColor = Color(1, 1, 1, 1)
+unfocusedColor = Color(0.458824, 0.458824, 0.458824, 1)
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+script = ExtResource("2_p2apu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Spacer4" type="Control" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer5" type="Control" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer1" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_hoccc")
+theme_override_font_sizes/font_size = 8
+placeholder_text = "your Input"
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Spacer2" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer3" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[connection signal="text_submitted" from="VBoxContainer/HBoxContainer/VBoxContainer/LineEdit" to="." method="inputSubmitted"]

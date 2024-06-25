@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgase2fl6jb7u"]
+
+[ext_resource type="Script" path="res://Scripts/Key.gd" id="1_213na"]
+[ext_resource type="Texture2D" uid="uid://dfru43k1eh0xj" path="res://Sprites/key.png" id="1_bsf31"]
+
+[node name="Key" type="Node2D"]
+use_parent_material = true
+script = ExtResource("1_213na")
+
+[node name="KeySprite" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("1_bsf31")

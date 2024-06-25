@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://brsd6ivfpqb6u"]
+
+[ext_resource type="Texture2D" uid="uid://bxou2ld6oevrs" path="res://Sprites/heal_potion.png" id="1_fa74b"]
+[ext_resource type="Script" path="res://Scripts/Heal.gd" id="1_fwrbf"]
+[ext_resource type="Shader" path="res://Shader/Outline.gdshader" id="2_7fh6u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_21ptn"]
+shader = ExtResource("2_7fh6u")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Animation" id="Animation_474g1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a8mp5"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s4hpm"]
+_data = {
+"RESET": SubResource("Animation_474g1"),
+"idle": SubResource("Animation_a8mp5")
+}
+
+[node name="Heal" type="Node2D" node_paths=PackedStringArray("animationPlayer")]
+script = ExtResource("1_fwrbf")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="HealSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_fa74b")
+
+[node name="OutlineSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_21ptn")
+texture = ExtResource("1_fa74b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s4hpm")
+}

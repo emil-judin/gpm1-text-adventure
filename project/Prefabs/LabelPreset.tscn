@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://byhvqu4auct5r"]
+
+[ext_resource type="FontFile" uid="uid://duykiugmun2e4" path="res://Resources/small_pixel.ttf" id="1_jxd4n"]
+[ext_resource type="Script" path="res://Scripts/LabelPreset.gd" id="1_t8bwh"]
+
+[node name="LabelPreset" type="RichTextLabel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_jxd4n")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Test text"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("1_t8bwh")

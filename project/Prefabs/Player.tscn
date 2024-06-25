@@ -1,0 +1,122 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4u34vpviwcqt"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_luy3k"]
+[ext_resource type="Texture2D" uid="uid://bljgs85ijuhg4" path="res://Sprites/player3.png" id="2_x2per"]
+[ext_resource type="Shader" path="res://Shader/Outline.gdshader" id="3_0u4ao"]
+[ext_resource type="Script" path="res://Scripts/old_HealthManager.gd" id="3_jd251"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nxc3v"]
+shader = ExtResource("3_0u4ao")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Animation" id="Animation_nn8nu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OutlineSprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_orikh"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0349853, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OutlineSprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s0qpp"]
+_data = {
+"RESET": SubResource("Animation_nn8nu"),
+"idle": SubResource("Animation_orikh")
+}
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("animationPlayer", "healthManager")]
+script = ExtResource("1_luy3k")
+animationPlayer = NodePath("AnimationPlayer")
+baseDamage = 1.0
+healthManager = NodePath("HealthManager")
+metadata/_edit_group_ = true
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_x2per")
+
+[node name="OutlineSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_nxc3v")
+texture = ExtResource("2_x2per")
+
+[node name="HealthManager" type="Node2D" parent="."]
+script = ExtResource("3_jd251")
+maxHealth = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s0qpp")
+}

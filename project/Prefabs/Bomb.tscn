@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkc844fbs4jwt"]
+
+[ext_resource type="Texture2D" uid="uid://dun3bsksijbgn" path="res://Sprites/bomb.png" id="1_3siji"]
+[ext_resource type="Script" path="res://Scripts/Bomb.gd" id="1_7ohmw"]
+[ext_resource type="Shader" path="res://Shader/Outline.gdshader" id="2_qkk6w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kqhdn"]
+shader = ExtResource("2_qkk6w")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Animation" id="Animation_5ihrh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4edn6"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5sqkp"]
+_data = {
+"RESET": SubResource("Animation_5ihrh"),
+"idle": SubResource("Animation_4edn6")
+}
+
+[node name="Bomb" type="Node2D" node_paths=PackedStringArray("animationPlayer")]
+use_parent_material = true
+script = ExtResource("1_7ohmw")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="BombSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_3siji")
+
+[node name="OutlineSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kqhdn")
+texture = ExtResource("1_3siji")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5sqkp")
+}

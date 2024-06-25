@@ -1,0 +1,117 @@
+[gd_scene load_steps=8 format=3 uid="uid://mjsl6ebq2slh"]
+
+[ext_resource type="Script" path="res://Scripts/StatsManager.gd" id="1_jbn5o"]
+[ext_resource type="Texture2D" uid="uid://dfru43k1eh0xj" path="res://Sprites/key.png" id="2_uo1vi"]
+[ext_resource type="Texture2D" uid="uid://dun3bsksijbgn" path="res://Sprites/bomb.png" id="3_aqxlu"]
+[ext_resource type="Texture2D" uid="uid://bxou2ld6oevrs" path="res://Sprites/heal_potion.png" id="4_lg8qo"]
+[ext_resource type="FontFile" uid="uid://duykiugmun2e4" path="res://Resources/small_pixel.ttf" id="4_pugha"]
+[ext_resource type="Texture2D" uid="uid://bvkisl4n00cr8" path="res://Sprites/heart.png" id="5_v8f6o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ustsj"]
+bg_color = Color(0.317647, 0.317647, 0.317647, 1)
+
+[node name="StatsManager" type="Control" node_paths=PackedStringArray("healLabel", "bombLabel", "key", "life1", "life2", "life3")]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_jbn5o")
+healLabel = NodePath("VBoxContainer/Panel/HBoxContainer/Heal/HealLabel")
+bombLabel = NodePath("VBoxContainer/Panel/HBoxContainer/Bomb/BombLabel")
+key = NodePath("VBoxContainer/Panel/HBoxContainer/Key")
+life1 = NodePath("VBoxContainer/Panel/HBoxContainer/Health/Life1")
+life2 = NodePath("VBoxContainer/Panel/HBoxContainer/Health/Life2")
+life3 = NodePath("VBoxContainer/Panel/HBoxContainer/Health/Life3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ustsj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+alignment = 2
+
+[node name="Key" type="TextureRect" parent="VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_uo1vi")
+
+[node name="Spacer1" type="Control" parent="VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Bomb" type="HBoxContainer" parent="VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="BombIcon" type="TextureRect" parent="VBoxContainer/Panel/HBoxContainer/Bomb"]
+modulate = Color(0.282353, 0.282353, 0.282353, 1)
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+texture = ExtResource("3_aqxlu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BombLabel" type="Label" parent="VBoxContainer/Panel/HBoxContainer/Bomb"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_pugha")
+theme_override_font_sizes/font_size = 8
+text = "x a"
+vertical_alignment = 1
+
+[node name="Heal" type="HBoxContainer" parent="VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="HealIcon" type="TextureRect" parent="VBoxContainer/Panel/HBoxContainer/Heal"]
+custom_minimum_size = Vector2(8, 10)
+layout_mode = 2
+texture = ExtResource("4_lg8qo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HealLabel" type="Label" parent="VBoxContainer/Panel/HBoxContainer/Heal"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_pugha")
+theme_override_font_sizes/font_size = 8
+text = "x b"
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="Health" type="HBoxContainer" parent="VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="Life1" type="TextureRect" parent="VBoxContainer/Panel/HBoxContainer/Health"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("5_v8f6o")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Life2" type="TextureRect" parent="VBoxContainer/Panel/HBoxContainer/Health"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("5_v8f6o")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Life3" type="TextureRect" parent="VBoxContainer/Panel/HBoxContainer/Health"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("5_v8f6o")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Spacer" type="Control" parent="VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2

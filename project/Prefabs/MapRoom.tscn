@@ -1,0 +1,27 @@
+[gd_scene load_steps=17 format=3 uid="uid://dbqkkuvhgfcrt"]
+
+[ext_resource type="Script" path="res://Scripts/MapRoom.gd" id="1_okhpn"]
+[ext_resource type="Texture2D" uid="uid://btjjfl6lsx2nw" path="res://Sprites/map/sprite_n.png" id="2_schxx"]
+[ext_resource type="Texture2D" uid="uid://c3oo13pb5xreq" path="res://Sprites/map/sprite_e.png" id="3_ea1c4"]
+[ext_resource type="Texture2D" uid="uid://br0f26nsyeya8" path="res://Sprites/map/sprite_nesw.png" id="3_r8fej"]
+[ext_resource type="Texture2D" uid="uid://kkfp885atu2x" path="res://Sprites/map/sprite_ne.png" id="4_p0fjb"]
+[ext_resource type="Texture2D" uid="uid://bkne2wtyo3630" path="res://Sprites/map/sprite_s.png" id="5_3lrnw"]
+[ext_resource type="Texture2D" uid="uid://4ctuhf0aa33s" path="res://Sprites/map/sprite_ns.png" id="6_osfrb"]
+[ext_resource type="Texture2D" uid="uid://yawg7y2ak5ee" path="res://Sprites/map/sprite_es.png" id="7_vwkc8"]
+[ext_resource type="Texture2D" uid="uid://c2y23otcr8bot" path="res://Sprites/map/sprite_nes.png" id="8_7u5af"]
+[ext_resource type="Texture2D" uid="uid://sr8yvigvqg0v" path="res://Sprites/map/sprite_w.png" id="9_dlewh"]
+[ext_resource type="Texture2D" uid="uid://dxmcexk24eust" path="res://Sprites/map/sprite_nw.png" id="10_topn5"]
+[ext_resource type="Texture2D" uid="uid://cso3um8rs4rtf" path="res://Sprites/map/sprite_ew.png" id="11_gx7p2"]
+[ext_resource type="Texture2D" uid="uid://cirqyp5okux7w" path="res://Sprites/map/sprite_new.png" id="12_r6gk2"]
+[ext_resource type="Texture2D" uid="uid://dgga05rr8xid7" path="res://Sprites/map/sprite_sw.png" id="13_qinyq"]
+[ext_resource type="Texture2D" uid="uid://c7p45w0bw32s8" path="res://Sprites/map/sprite_nsw.png" id="14_0h6e3"]
+[ext_resource type="Texture2D" uid="uid://d148m3ovbp4a" path="res://Sprites/map/sprite_esw.png" id="15_jo6cs"]
+
+[node name="MapRoom" type="Node2D" node_paths=PackedStringArray("roomSprite")]
+script = ExtResource("1_okhpn")
+roomSprite = NodePath("MapRoomSprite")
+roomTextures = Array[Texture2D]([null, ExtResource("2_schxx"), ExtResource("3_ea1c4"), ExtResource("4_p0fjb"), ExtResource("5_3lrnw"), ExtResource("6_osfrb"), ExtResource("7_vwkc8"), ExtResource("8_7u5af"), ExtResource("9_dlewh"), ExtResource("10_topn5"), ExtResource("11_gx7p2"), ExtResource("12_r6gk2"), ExtResource("13_qinyq"), ExtResource("14_0h6e3"), ExtResource("15_jo6cs"), ExtResource("3_r8fej")])
+metadata/_edit_group_ = true
+
+[node name="MapRoomSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_r8fej")

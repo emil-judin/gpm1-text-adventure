@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://blgch03l726w"]
+
+[ext_resource type="Script" path="res://Scripts/DungeonRoom.gd" id="1_8hb0n"]
+[ext_resource type="PackedScene" uid="uid://dkc844fbs4jwt" path="res://Prefabs/Bomb.tscn" id="2_sjwtd"]
+[ext_resource type="PackedScene" uid="uid://cc6wen0p5s1yr" path="res://Scenes/Tilemap.tscn" id="2_vddqm"]
+[ext_resource type="PackedScene" uid="uid://brsd6ivfpqb6u" path="res://Prefabs/Heal.tscn" id="3_jx48e"]
+[ext_resource type="PackedScene" uid="uid://4s6b848wx15q" path="res://Prefabs/KeyWarden.tscn" id="4_drt64"]
+
+[node name="DungeonRoom" type="Node2D" node_paths=PackedStringArray("bombNode", "healNode", "keyWardenNode", "dungeonTileMap")]
+use_parent_material = true
+script = ExtResource("1_8hb0n")
+bombScene = ExtResource("2_sjwtd")
+bombNode = NodePath("Bombs")
+healScene = ExtResource("3_jx48e")
+healNode = NodePath("Heal")
+keyWardenScene = ExtResource("4_drt64")
+keyWardenNode = NodePath("KeyWarden")
+dungeonTileMap = NodePath("TileMap")
+northernDoorPosition = Vector2(0, -2)
+easternDoorPosition = Vector2(2, 0)
+southernDoorPosition = Vector2(0, 2)
+westernDoorPosition = Vector2(-2, 0)
+metadata/_edit_group_ = true
+
+[node name="Bombs" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2(-64, -64)
+
+[node name="Heal" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2(-64, -48)
+
+[node name="KeyWarden" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2(16, -16)
+
+[node name="TileMap" parent="." instance=ExtResource("2_vddqm")]
+use_parent_material = true
+position = Vector2(-8, -8)
+layer_0/tile_data = PackedInt32Array(65537, 65536, 3, 1, 65536, 3, 0, 65536, 3, 65536, 65536, 3, 131072, 65536, 4, 131073, 65536, 4, 65538, 131072, 2, 2, 131072, 3, 131074, 131072, 4, -65536, 65536, 3, -65535, 65536, 3, -65534, 131072, 2, 196608, 262144, 1, 196609, 262144, 1, 196610, 262144, 1, 131075, 327680, 0, 65539, 327680, 0, 3, 327680, 0, 196607, 65536, 4, 131071, 65536, 3, 65535, 65536, 3, -1, 65536, 3, -65533, 327680, 0, 196611, 65536, 1, 262143, 262144, 1, -65537, 65536, 2, -131072, 65536, 2, -131071, 65536, 2, -131070, 131072, 2, -131069, 327680, 0, -2, 0, 3, 65534, 0, 3, 131070, 0, 3, 196606, 0, 4, 262142, 65536, 4, -65538, 0, 2, -196606, 262144, 0, -196607, 262144, 0, -196608, 262144, 0, -131073, 262144, 0, -196605, 65536, 0, -131074, 65536, 2, 262141, 0, 1, 196605, 327680, 1, 131069, 327680, 1, 65533, 327680, 1, -3, 327680, 1, -65539, 327680, 1, -131075, 0, 0)

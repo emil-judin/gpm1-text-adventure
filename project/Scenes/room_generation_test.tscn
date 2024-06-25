@@ -1,0 +1,263 @@
+[gd_scene load_steps=23 format=3 uid="uid://36p0nydch8gn"]
+
+[ext_resource type="Shader" path="res://Shader/Pixelation.gdshader" id="1_4iod8"]
+[ext_resource type="Script" path="res://Scripts/RoomManager.gd" id="1_g81wl"]
+[ext_resource type="PackedScene" uid="uid://dbqkkuvhgfcrt" path="res://Prefabs/MapRoom.tscn" id="2_5qo34"]
+[ext_resource type="PackedScene" uid="uid://blgch03l726w" path="res://Prefabs/DungeonRoom.tscn" id="3_rrpid"]
+[ext_resource type="Script" path="res://Scripts/CameraZoom.gd" id="4_055gu"]
+[ext_resource type="PackedScene" uid="uid://lhicx8xrcg3g" path="res://Prefabs/GameManager.tscn" id="5_btob4"]
+[ext_resource type="PackedScene" uid="uid://du6r3bsahws6a" path="res://Prefabs/Pin.tscn" id="5_vvbaa"]
+[ext_resource type="PackedScene" uid="uid://clj2gff787a68" path="res://Prefabs/TextParser.tscn" id="7_8021l"]
+[ext_resource type="PackedScene" uid="uid://mjsl6ebq2slh" path="res://Prefabs/StatsManager.tscn" id="7_wprdo"]
+[ext_resource type="PackedScene" uid="uid://dh2v81jl0wobf" path="res://Prefabs/AttackTyper.tscn" id="8_d6x4h"]
+[ext_resource type="PackedScene" uid="uid://dpsl4ksift3r" path="res://Prefabs/Sceletons.tscn" id="9_41yjw"]
+[ext_resource type="PackedScene" uid="uid://c4u34vpviwcqt" path="res://Prefabs/Player.tscn" id="10_05iut"]
+[ext_resource type="PackedScene" uid="uid://uyrw5ecau5oq" path="res://Prefabs/SceletonBoss.tscn" id="14_kfh34"]
+[ext_resource type="Script" path="res://Scripts/RoomTransition.gd" id="14_th68w"]
+[ext_resource type="AudioStream" uid="uid://bh68s6e8hl7x3" path="res://Sound/bone_crack.wav" id="15_us501"]
+[ext_resource type="AudioStream" uid="uid://mghm3ob4jhjc" path="res://Sound/bomb.wav" id="16_emmd3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ryyh"]
+shader = ExtResource("1_4iod8")
+shader_parameter/pixelFactor = 0.99
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hw12x"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[sub_resource type="Animation" id="Animation_i4nm0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:material:shader_parameter/pixelFactor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.99]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CanvasLayer/TextParser/VBoxContainer/HBoxContainer/VBoxContainer/LineEdit:editable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_aqcpa"]
+resource_name = "room_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:material:shader_parameter/pixelFactor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.99]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CanvasLayer/TextParser/VBoxContainer/HBoxContainer/VBoxContainer/LineEdit:editable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_r88jo"]
+resource_name = "room_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:material:shader_parameter/pixelFactor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.99, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CanvasLayer/TextParser/VBoxContainer/HBoxContainer/VBoxContainer/LineEdit:editable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41plp"]
+_data = {
+"RESET": SubResource("Animation_i4nm0"),
+"room_in": SubResource("Animation_aqcpa"),
+"room_out": SubResource("Animation_r88jo")
+}
+
+[node name="RoomManager" type="Node2D" node_paths=PackedStringArray("mapParentNode", "dungeonParentNode", "enemyParentNode")]
+material = SubResource("ShaderMaterial_4ryyh")
+script = ExtResource("1_g81wl")
+mapRoomScene = ExtResource("2_5qo34")
+dungeonRoomScene = ExtResource("3_rrpid")
+mapParentNode = NodePath("CanvasLayer/Panel/Control/Map")
+dungeonParentNode = NodePath("Dungeon")
+enemyParentNode = NodePath("Enemy")
+bombSpawnProbability = 0.1
+healSpawnProbability = 0.1
+metadata/_edit_group_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StatsManager" parent="CanvasLayer" instance=ExtResource("7_wprdo")]
+
+[node name="AttackTyper" parent="CanvasLayer" instance=ExtResource("8_d6x4h")]
+visible = false
+
+[node name="TextParser" parent="CanvasLayer" node_paths=PackedStringArray("gameManager") instance=ExtResource("7_8021l")]
+gameManager = NodePath("../../GameManager")
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+clip_contents = true
+custom_minimum_size = Vector2(60, 60)
+theme_override_styles/panel = SubResource("StyleBoxFlat_hw12x")
+
+[node name="Control" type="Control" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Map" type="Control" parent="CanvasLayer/Panel/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+
+[node name="Pin" parent="CanvasLayer/Panel/Control" instance=ExtResource("5_vvbaa")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Enemy" type="Node2D" parent="."]
+use_parent_material = true
+
+[node name="Dungeon" type="Node2D" parent="."]
+use_parent_material = true
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("4_055gu")
+player = NodePath("../Player")
+zoomSpeed = 0.005
+
+[node name="Player" parent="." node_paths=PackedStringArray("statsManager") instance=ExtResource("10_05iut")]
+statsManager = NodePath("../CanvasLayer/StatsManager")
+
+[node name="GameManager" parent="." node_paths=PackedStringArray("roomTransition", "player", "pin", "mapNode", "textParser", "roomManager", "attackTyper", "camera") instance=ExtResource("5_btob4")]
+winScreenScene = "res://Scenes/WinScreen.tscn"
+roomTransition = NodePath("../RoomTransition")
+player = NodePath("../Player")
+pin = NodePath("../CanvasLayer/Panel/Control/Pin")
+mapNode = NodePath("../CanvasLayer/Panel/Control/Map")
+textParser = NodePath("../CanvasLayer/TextParser")
+roomManager = NodePath("..")
+attackTyper = NodePath("../CanvasLayer/AttackTyper")
+camera = NodePath("../Camera2D")
+sceletonsScene = ExtResource("9_41yjw")
+sceletonBossScene = ExtResource("14_kfh34")
+sceletonsSpawnProbabiblity = 0.3
+enemyDropHealProbability = 0.25
+enemyDropBombProbability = 5.0
+
+[node name="RoomTransition" type="Node2D" parent="." node_paths=PackedStringArray("player", "camera", "pixelationAnimationPlayer")]
+script = ExtResource("14_th68w")
+player = NodePath("../Player")
+camera = NodePath("../Camera2D")
+pixelationAnimationPlayer = NodePath("AnimationPlayer")
+metadata/_edit_group_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RoomTransition"]
+libraries = {
+"": SubResource("AnimationLibrary_41plp")
+}
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_us501")
+
+[node name="BombSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_emmd3")
+
+[connection signal="attack_typer_finished" from="CanvasLayer/AttackTyper" to="GameManager" method="handleAttackTyperFeedback"]
+[connection signal="bombSound" from="GameManager" to="BombSound" method="play"]
+[connection signal="enemyDeath" from="GameManager" to="DeathSound" method="play"]
+
+[editable path="CanvasLayer/TextParser"]

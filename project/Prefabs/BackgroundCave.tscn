@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://g0vro8rj5fud"]
+
+[ext_resource type="AudioStream" uid="uid://cumr6yfbjgldb" path="res://Sound/cave_sound.wav" id="1_uxwql"]
+
+[node name="BackgroundCave" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_uxwql")
+autoplay = true

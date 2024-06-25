@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://28pb3j8wygf"]
+
+[ext_resource type="Script" path="res://Scripts/Intro.gd" id="1_j8cyo"]
+[ext_resource type="FontFile" uid="uid://duykiugmun2e4" path="res://Resources/small_pixel.ttf" id="2_vq1bn"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Intro" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j8cyo")
+gameScene = "res://Scenes/room_generation_test.tscn"
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Intro"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 7.0
+offset_right = -4.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Intro/VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vq1bn")
+theme_override_font_sizes/font_size = 16
+text = "Intro"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Intro/VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vq1bn")
+theme_override_font_sizes/font_size = 8
+text = "you are a pirate who has found himself in a cave full of sceletons!
+Will you be able to escape  by beating the end boss?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label3" type="Label" parent="Intro/VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vq1bn")
+theme_override_font_sizes/font_size = 8
+text = "combat sceletons by fast-typing prompts from popular pirate shanties"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="Intro/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="Intro/VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vq1bn")
+theme_override_font_sizes/font_size = 8
+text = "you can regenerate the map with f12"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label5" type="Label" parent="Intro/VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vq1bn")
+theme_override_font_sizes/font_size = 8
+text = "- press any key to start -"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true

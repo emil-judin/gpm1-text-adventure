@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="AttackPrompt" load_steps=2 format=3 uid="uid://c8uoo7h6djyc3"]
+
+[ext_resource type="Script" path="res://Scripts/AttackPrompt.gd" id="1_70xeo"]
+
+[resource]
+script = ExtResource("1_70xeo")
+attackPrompts = Array[String](["yo ho yo ho a pirates life for me", "heave away me jollies heave away", "come all you bold seamen and hear my sad tale", "heave ho me lads heave ho", "way haul away well haul away together", "let her go boys let her go", "heave away and heave together", "row me bully boys row", "haul away your rolling king", "heave away santiana"])

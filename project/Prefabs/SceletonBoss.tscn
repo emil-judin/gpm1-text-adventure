@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=3 uid="uid://uyrw5ecau5oq"]
+
+[ext_resource type="Script" path="res://Scripts/Sceletons.gd" id="1_hjonv"]
+[ext_resource type="Texture2D" uid="uid://bhvjxihd6vvpr" path="res://Sprites/sceleton_boss_head.png" id="2_ru4lh"]
+[ext_resource type="Shader" path="res://Shader/Outline.gdshader" id="3_fqou0"]
+[ext_resource type="Script" path="res://Scripts/old_HealthManager.gd" id="3_llcrd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rgaiq"]
+shader = ExtResource("3_fqou0")
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="Animation" id="Animation_kyvat"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OutlineSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SceletonBossSprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vmauf"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutlineSprite:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 0), Color(1, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OutlineSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0075348, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SceletonBossSprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s2i3p"]
+_data = {
+"RESET": SubResource("Animation_kyvat"),
+"idle": SubResource("Animation_vmauf")
+}
+
+[node name="SceletonBoss" type="Node2D" node_paths=PackedStringArray("healthManager", "animtationPlayer")]
+use_parent_material = true
+script = ExtResource("1_hjonv")
+healthManager = NodePath("HealthManager")
+animtationPlayer = NodePath("AnimationPlayer")
+
+[node name="SceletonBossSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_ru4lh")
+
+[node name="OutlineSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rgaiq")
+position = Vector2(0, -16)
+texture = ExtResource("2_ru4lh")
+
+[node name="HealthManager" type="Node2D" parent="."]
+script = ExtResource("3_llcrd")
+maxHealth = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s2i3p")
+}
